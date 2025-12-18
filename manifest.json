@@ -1,0 +1,12 @@
+{
+  "manifest_version": 3,
+  "name": "Calculadora dos pontos do Luiz",
+  "version": "1.0",
+  "description": "Soma pontos e horas dos cartões do Trello por coluna (Teoricamente)",
+  "content_scripts": [
+    {
+      "matches": ["https://trello.com/*"],
+      "js": ["content.js"]
+    }
+  ]
+}
