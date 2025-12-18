@@ -1,12 +1,17 @@
 {
-  "manifest_version": 3,
-  "name": "Calculadora dos pontos do Luiz",
-  "version": "1.0",
-  "description": "Soma pontos e horas dos cartões do Trello por coluna (Teoricamente)",
-  "content_scripts": [
-    {
-      "matches": ["https://trello.com/*"],
-      "js": ["content.js"]
-    }
-  ]
+    "manifest_version": 3,
+    "name": "Trello Points and Hours Calculator",
+    "version": "1.0.0",
+    "description": "Calculates total points and worked hours from Trello cards per column, respecting active filters.",
+    "icons": {
+      "16": "icons/16x16.png",
+      "48": "icons/48x48.png",
+      "128": "icons/128x128.png"
+    },
+    "content_scripts": [
+      {
+        "matches": ["https://trello.com/*"],
+        "js": ["content.js"]
+      }
+    ]
 }
