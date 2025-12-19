@@ -3,6 +3,7 @@
     "name": "Trello Points and Hours Calculator",
     "version": "1.0.0",
     "description": "Calculates total points and worked hours from Trello cards per column, respecting active filters.",
+    "author": "Luiz Henrique Vitorino",
     "icons": {
       "16": "icons/16x16.png",
       "48": "icons/48x48.png",
@@ -11,7 +12,12 @@
     "content_scripts": [
       {
         "matches": ["https://trello.com/*"],
-        "js": ["content.js"]
+        "js": [
+          "src/trello-dom.js",
+          "src/calculator.js",
+          "src/observer.js",
+          "src/main.js"
+        ]
       }
     ]
 }
