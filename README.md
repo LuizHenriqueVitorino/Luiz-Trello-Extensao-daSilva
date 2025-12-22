@@ -1,147 +1,110 @@
 # Trello Points and Hours Calculator
 
-A lightweight Chrome extension that automatically calculates **story points** and **worked hours** per Trello list, updating the totals in real time and **respecting active filters**.
+A Chrome extension that automatically calculates total points and worked hours from Trello cards per column, fully respecting active Trello filters.
 
-Designed to be simple, fast, and privacy-friendly — all processing happens locally in your browser.
+This extension is ideal for agile teams, personal Kanban boards, and anyone who wants quick visibility into effort distribution without leaving Trello.
 
 ---
 
 ## Features
 
-* Automatic calculation per list
-  Sums points and hours for each Trello column independently.
-
-* Filter-aware
-  Only counts visible cards, respecting Trello filters (for example: "Cards assigned to me").
-
-* Simple syntax
-  Points at the end of the card name using parentheses `(n)`
-  Hours at the end of the card name using brackets `[n]`
-
-* Real-time updates
-  Reacts instantly to drag & drop, card edits, filter changes and new cards.
-
-* Privacy-first
-  No data collection, no external requests, no tracking and no remote code execution.
-
----
-
-## Card Naming Convention
-
-To make the extension work, follow this naming pattern in your Trello cards:
-
-Task description (points) [hours]
-
-### Examples
-
-Fix login button (3) [2]
-Refactor payment service (5) [6]
-Write unit tests (2) [1]
-
-* `(3)` represents story points
-* `[2]` represents worked hours
-
-Both values are optional. Cards without this format are ignored.
+- Automatically sums points and worked hours per Trello column
+- Supports integer and decimal values
+- Updates totals dynamically as cards change
+- Respects active Trello filters (only visible cards are counted)
+- Works entirely locally in the browser
+- No data collection, no external services, no tracking
 
 ---
 
 ## How It Works
 
-* The extension scans each Trello list (column)
-* Only visible cards are processed
-* Points and hours are extracted using numeric patterns
-* Totals are displayed next to the list title
+The extension reads values directly from the card title using a simple notation.
 
-Example display:
+### Points
 
-Done  |  8 pts  |  5 h
+Use parentheses ( ) anywhere in the card title to define points.
+
+Examples:
+- (2) Implement login
+- (1.5) Refactor API
+- (0.5) Minor UI fix
+
+### Worked Hours
+
+Use brackets [ ] anywhere in the card title to define worked hours.
+
+Examples:
+- [3] Setup environment
+- [1.75] Bug fixing
+- [0.5] Quick review
+
+### Combined Example
+
+(2) Adjust button alignment [1.5]
+
+This card represents:
+- 2 points
+- 1.5 worked hours
 
 ---
 
-## Project Structure
+## Column Totals
 
-/
-├─ manifest.json
-├─ icons/
-│  ├─ 16x16.png
-│  ├─ 48x48.png
-│  └─ 128x128.png
-└─ src/
-├─ trello-dom.js     # DOM reading and UI updates
-├─ calculator.js    # Points and hours calculation logic
-├─ observer.js      # MutationObserver handling
-└─ main.js          # Content script entry point
+For each Trello column, the extension displays:
 
-All scripts are loaded in order via `manifest.json` and share the same execution context.
+🧮 X pts   ⏳ Y h
+
+Where:
+- X is the total points
+- Y is the total worked hours
+
+Decimal precision is handled automatically to avoid floating-point errors.
+
+---
+
+## Filter Awareness
+
+When Trello filters are active (for example, filtering by member or label):
+
+- Only visible cards are counted
+- Totals update automatically as filters change
+
+This allows accurate per-person or per-context tracking.
+
+---
+
+## Privacy
+
+This extension does not collect, store, or transmit any personal data.
+
+All processing happens locally in the user's browser and only on trello.com pages.
+
+---
+
+## Technical Overview
+
+- Chrome Extension using Manifest V3
+- Content script-based architecture
+- Uses MutationObserver to react to Trello DOM changes
+- Modular internal structure for better maintainability
 
 ---
 
 ## Installation (Development)
 
-1. Clone the repository
+1. Clone or download this repository
 2. Open Chrome and navigate to chrome://extensions
 3. Enable Developer mode
 4. Click "Load unpacked"
-5. Select the project root folder
-6. Open Trello and refresh the page
+5. Select the project folder
 
 ---
 
-## Permissions
+## Roadmap Ideas
 
-This extension only uses site content access on trello.com.
+- Toggle to show or hide points and hours
+- Custom formatting options
+- Per-board configuration
+- Export column summaries
 
-No additional permissions are required.
-
----
-
-## Privacy Policy
-
-This extension does not collect, store, or transmit any personal data.
-
-* All processing happens locally in the user's browser
-* The extension runs only on trello.com
-* No analytics, tracking, or external services are used
-
----
-
-## Technical Notes
-
-* Built using Chrome Extension Manifest V3
-* Uses a multi-file content script approach without ES Modules
-* Avoids bundlers for maximum compatibility and simplicity
-* Uses MutationObserver to efficiently track DOM changes
-
----
-
-## Roadmap
-
-* Customizable patterns for points and hours
-* Toggle display (points only / hours only)
-* Options page
-* Localization support
-* Export totals (CSV / JSON)
-
----
-
-## Contributing
-
-Contributions are welcome.
-
-You can open issues, suggest improvements or submit pull requests. Please keep changes small and focused.
-
----
-
-## License
-
-MIT License
-
----
-
-## Author
-
-Luiz Henrique Vitorino
-
----
-
-If you find this extension useful, consider starring the project or sharing it with your team.
