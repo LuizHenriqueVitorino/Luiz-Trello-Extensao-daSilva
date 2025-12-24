@@ -32,12 +32,16 @@ function processCardVisual(card) {
     // Cria linha de métricas
     const metricsLine = document.createElement("div");
     metricsLine.className = "trello-card-metrics";
-    metricsLine.textContent = `🧮 ${points ?? 0} pts  ⏳ ${hours ?? 0} h`;
 
-    // Estilo mínimo TODO: melhorar depois
-    metricsLine.style.fontSize = "12px";
-    metricsLine.style.opacity = "0.8";
-    metricsLine.style.marginTop = "4px";
+    const parts = [];
+    if (points) parts.push(`🧮 ${points} pts`);
+    if (hours) parts.push(`⏳ ${hours} h`);
+
+    metricsLine.textContent = parts.join("  ");
+
+    
+    const existingMetrics = card.querySelector(".trello-card-metrics");
+    if (existingMetrics) existingMetrics.remove();
 
     card.appendChild(metricsLine);
 
@@ -77,9 +81,6 @@ function updateListHeader(listElement, totalPoints, totalHours) {
     // Create counter badge
     const badge = document.createElement('span');
     badge.className = 'trello-points-hours';
-    badge.style.marginLeft = '8px';
-    badge.style.fontWeight = 'bold';
-    badge.style.fontSize = '12px';
     badge.textContent = `🧮${totalPoints} pts  ⏳${totalHours} h`;
 
     listTitle.appendChild(badge);

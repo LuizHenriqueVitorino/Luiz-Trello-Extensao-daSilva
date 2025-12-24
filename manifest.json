@@ -13,10 +13,13 @@
       {
         "matches": ["https://trello.com/*"],
         "js": [
-          "src/trello-dom.js",
-          "src/calculator.js",
-          "src/observer.js",
-          "src/main.js"
+          "src/js/trello-dom.js",
+          "src/js/calculator.js",
+          "src/js/observer.js",
+          "src/js/main.js"
+        ],
+        "css": [
+          "src/css/styles.css"
         ]
       }
     ]
