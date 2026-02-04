@@ -6,6 +6,25 @@ The format follows a simplified version of Keep a Changelog
 and adheres to Semantic Versioning.
 
 ---
+## [1.2.0] - 2026-02-03
+
+### Added
+- Display of **points and worked hours directly on each Trello card**
+- Automatic parsing of card titles to extract:
+  - Points defined inside parentheses `( )`
+  - Worked hours defined inside brackets `[ ]`
+- Visual indicators added below the card title:
+  - 🧮 for points
+  - ⏳ for worked hours
+- Cards without metrics or with **zero values** no longer display indicators, keeping the interface clean
+- Preservation of the original card title internally to ensure accurate calculations
+
+### Improved
+- Dynamic update of card metrics when the card title is edited, without requiring a page reload
+- More robust DOM handling to prevent duplicate rendering and infinite update loops
+- Improved synchronization between card-level metrics and list-level totals
+
+---
 
 ## [1.1.0] - 2025-12-22
 

@@ -1,6 +1,6 @@
 /* Métricas exibidas abaixo do nome do cartão */
 .trello-card-metrics {
-    font-size: 11px;
+    font-size: 13px;
     color: rgb(94, 108, 132);
     margin-top: 2px;
     display: flex;
@@ -8,10 +8,11 @@
     align-items: center;
     line-height: 1.2;
     user-select: none;
+    font-weight: bold;
 }
 
 .trello-points-hours {
     margin-left: 8px;
     font-weight: bold;
-    font-size: 12px;
+    font-size: 13px;
 }
