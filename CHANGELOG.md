@@ -6,6 +6,14 @@ The format follows a simplified version of Keep a Changelog
 and adheres to Semantic Versioning.
 
 ---
+## [1.2.1] - 2026-02-06
+
+### Improved
+- More resilient card rendering flow, preventing stale metric badges when Trello re-renders card titles
+- Calculator now supports both dot and comma decimal separators in points/hours values
+- Aggregation now sums all metric occurrences found in a card title for more predictable totals
+
+
 ## [1.2.0] - 2026-02-03
 
 ### Added

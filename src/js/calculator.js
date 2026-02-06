@@ -1,3 +1,22 @@
+function getMetricStats(text, regex) {
+    const matches = [...text.matchAll(regex)];
+
+    if (matches.length === 0) {
+        return { total: 0, maxDecimals: 0 };
+    }
+
+    return matches.reduce((acc, match) => {
+        const rawValue = match[1].replace(',', '.');
+        const numericValue = Number(rawValue);
+        const decimals = rawValue.includes('.') ? rawValue.split('.')[1].length : 0;
+
+        return {
+            total: acc.total + numericValue,
+            maxDecimals: Math.max(acc.maxDecimals, decimals)
+        };
+    }, { total: 0, maxDecimals: 0 });
+}
+
 function calculatePointsAndHours(cardTexts) {
     let totalPoints = 0;
     let totalHours = 0;
@@ -6,29 +25,18 @@ function calculatePointsAndHours(cardTexts) {
     let maxHoursDecimals = 0;
 
     cardTexts.forEach(text => {
-        // Points: (n)
-        const pointsMatch = text.match(/\((\d+(?:\.\d+)?)\)/);
-        if (pointsMatch) {
-            const value = pointsMatch[1];
-            totalPoints += Number(value);
+        const pointsStats = getMetricStats(text, /\((\d+(?:[\.,]\d+)?)\)/g);
+        const hoursStats = getMetricStats(text, /\[(\d+(?:[\.,]\d+)?)\]/g);
 
-            const decimals = value.includes('.') ? value.split('.')[1].length : 0;
-            maxPointsDecimals = Math.max(maxPointsDecimals, decimals);
-        }
+        totalPoints += pointsStats.total;
+        totalHours += hoursStats.total;
 
-        // Hours: [n]
-        const hoursMatch = text.match(/\[(\d+(?:\.\d+)?)\]/);
-        if (hoursMatch) {
-            const value = hoursMatch[1];
-            totalHours += Number(value);
-
-            const decimals = value.includes('.') ? value.split('.')[1].length : 0;
-            maxHoursDecimals = Math.max(maxHoursDecimals, decimals);
-        }
+        maxPointsDecimals = Math.max(maxPointsDecimals, pointsStats.maxDecimals);
+        maxHoursDecimals = Math.max(maxHoursDecimals, hoursStats.maxDecimals);
     });
 
-    return { 
-        totalPoints: Number(totalPoints.toFixed(maxPointsDecimals)), 
+    return {
+        totalPoints: Number(totalPoints.toFixed(maxPointsDecimals)),
         totalHours: Number(totalHours.toFixed(maxHoursDecimals))
     };
 }
